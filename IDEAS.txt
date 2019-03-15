@@ -1,0 +1,45 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.9.0
+  Features:
+    - You cannot build neither belts nor inserters outside as they are not waterproof (duh).
+    You can only build them in Factorissimo2 buildings.
+    - Big Factories/Furnaces spawn in the map randomly. Providing what they need gives you cash in return.
+    - [TechnologyMarket] Spend your cash to research new technologies. Labs now accepts ucoin.
+    - [BlackMarket2] You can sell/buy items/fluids/energy through the Black Market
+    - [BlackMarket2] Loans can be taken out by a player. Loan interest is paid monthly to the bank,
+    at the current interest rate. The initial interest rate is set at the game start
+    according to the difficulty settings. The interest rate does not change during the game.
+    - Be-aware of bankruptcy, rogues are not nice with people who does not pay.
+    - As there is no more belts outside, mining-drills are not usable anymore, thus they are disabled.
+    You have to use AAI miners or Mining Robots.
+    - Get better at Multimodal transport or combined transport:
+      - Use AAI Hauler to transport items between buildings.
+        - TIPS : Cars run faster on road
+      - Use Train to transport items between buildings.
+      - Use Air to transport items between buildings. (v1.0.0)
+    - Fluid -> You need to use barrels (maybe later, hauler for fluids?)
+    - Of course, native are not going to help you in the task.
+    - Big Factories/Furnaces might change their needs randomly. The growth of
+    the output of primary industries depends upon the percentage of cargo
+    transported away from them. The more you transport, the faster it grows in
+    the long term on average.
+
+
+  Changes:
+    None
+
+
+----------
+Backlog:
+
+Property Maintenance
+Why did I build so many signals?
+The expense of property maintenance is directly proportional to the company's
+number of rail and road pieces, canals, and station/airport tiles. You can see
+the cost for each type of infrastructure from the Company window.
+
+- Different industry chains : (v1.5.0)
+  - Toyland
+    - Toy Factory - Accepts Plastic from Plastic Fountains and Batteries from Battery Farm. Produces Toys.
+    - Toy Shop - Accepts Toys from Toy Factory.
+  - Food (needs FoodIndustry)

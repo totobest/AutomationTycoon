@@ -1,0 +1,21 @@
+{
+	"name": "AutomationTycoon",
+	"version": "1.0.0",
+	"title": "tb's Automation Tycoon",
+	"author": "totobest",
+	"description": "You found out your belts are not waterproof, duh.",
+	"homepage": "",
+	"contact": "",
+	"factorio_version":"0.17",
+	"dependencies": [
+		"base >= 0.17.12",
+		"Factorissimo2 >= 2.3.1",
+		"aai-programmable-vehicles >= 0.5.2",
+		"aai-vehicles-hauler >= 0.4.1",
+		"aai-vehicles-miner >= 0.4.1",
+		"BlackMarket2 >= 2.0.0",
+		"TechnologyMarket >= 2.0.0",
+		"stdlib >= 1.0.2",
+		"? aai-industry >= 0.3.4"
+	]
+}
