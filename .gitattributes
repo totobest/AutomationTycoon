@@ -1,4 +1,8 @@
-*.sh          export-ignore
-*.cmd         export-ignore
-*.xcf         export-ignore
-screenshots/  export-ignore
+*.sh                              export-ignore
+*.cmd                             export-ignore
+*.xcf                             export-ignore
+screenshots/                      export-ignore
+city-map-gen.json                 export-ignore
+mappreview.png                    export-ignore
+save-commands.json*               export-ignore
+server-settings.test.json         export-ignore

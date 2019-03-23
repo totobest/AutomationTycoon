@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.9.0
+  Features:
+    - You cannot build neither belts outside as they are not waterproof (duh).
+    You can only build them in Factorissimo2 buildings.
+    - A Factorissimo2 level 0 is now available when starting a game.
+    - Cities spawn in the map randomly. Providing what they need gives you cash in return.
+    - [TechnologyMarket] Spend your cash to research new technologies. Labs now accepts ucoin.
+    - As there is no more belts outside, mining-drills are not easy to automate at low-tech. You might have to
+     use AAI miners instead.
+    - Get better at Multimodal transport or combined transport:
+      - Use AAI Hauler to transport items between buildings.
+      - Use Train to transport items between buildings.
+      - Use Air to transport items between buildings. (v1.0.0)
+    - Of course, native are not going to help you in the task.
+
+
+  Changes:
+    None

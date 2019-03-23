@@ -1,0 +1,5 @@
+{
+	"commands": [
+		"**/*.lua : C:\\games\\Factorio_0.17\\bin\\x64\\factorio.exe ----map-gen-settings city-map-gen.json --disable-audio --generate-map-preview mappreview.png  --mod-directory C:\\Dropbox\\factorio-mp\\tony\\mods --report-quantities at-city --map-preview-scale 0.2 --map-preview-size 2000"
+	]
+}
