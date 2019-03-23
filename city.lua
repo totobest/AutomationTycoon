@@ -56,7 +56,7 @@ local function commonAdjustments(factory)
     factory.max_health = 1600
 
     factory.scale_entity_info_icon = true
-    factory.autoplace = city_autoplace_settings(0.093, {{1, 1}, {1, 1}})
+    factory.autoplace = city_autoplace_settings(0.085, {{1, 1}, {1, 1}})
     factory.create_ghost_on_death = false
     factory.flags = {
       -- "indestructible",
@@ -121,12 +121,13 @@ local function create_city()
         return retvalue
     end
 
-        city.fluid_boxes = {
-            fluidBox("input", {0, -9}),
-            fluidBox("input", {-9, 0}),
-            fluidBox("output", {9, 0}),
-            fluidBox("output", {0, 9}),
-        }
+    city.fluid_boxes = {}
+        -- city.fluid_boxes = {
+        --     fluidBox("input", {0, -9}),
+        --     fluidBox("input", {-9, 0}),
+        --     fluidBox("output", {9, 0}),
+        --     fluidBox("output", {0, 9}),
+        -- }
 
     adjustVisuals(city, 6, 1/32)
 

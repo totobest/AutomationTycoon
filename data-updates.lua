@@ -16,7 +16,7 @@ local table = require('__stdlib__/stdlib/utils/table')
 
 -- require("utils")
 -- local table = require('__stdlib__/stdlib/utils/table')
-require("bigassembly")
+require("city")
 
 data:extend({
 	{
@@ -40,12 +40,8 @@ local function create_ucoin_recipe(item_name, price, enabled)
 			ingredients = {
 				{item_name, 1}
 			},
-			results = {
-				{
-					name = "ucoin",
-					amount = price
-				},
-			}
+			result = "ucoin",
+			result_count = price
 		}
 	})
 end
@@ -221,8 +217,7 @@ local function find_all_results_sub(recipe_sub)
 	assert(recipe_sub ~= nil)
 	if recipe_sub.result ~= nil then
 		return {recipe_sub.result}
-	else
-		assert(recipe_sub.results ~= nil, "result and results both set for recipe " .. recipe_sub.name)
+	elseif recipe_sub.results ~= nil then
 		return table.map(table.filter(recipe_sub.results, function(i)
 			return i.type == "item"
 		end), function(i)
@@ -235,7 +230,11 @@ local function find_all_results(recipe)
 	assert(recipe ~= nil)
 	-- TODO: Maybe go through all recipes including difficulties
 	-- as output might be differents
-	return find_all_results_sub(recipe.normal or recipe.expensive or recipe)
+	local ret = find_all_results_sub(recipe.normal or recipe.expensive or recipe)
+	if #ret == 0 then
+		LOG("not results found for recipe " .. recipe.name)
+	end
+	return ret
 end
 -- start from recipe so we know player can craft/assemble the item
 table.each(data.raw.recipe, function(recipe)
@@ -276,4 +275,5 @@ table.each(data.raw.resource, function(resource)
 	end
 end)
 
+-- dummy recipe
 create_ucoin_recipe("ucoin", 0)

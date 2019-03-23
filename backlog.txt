@@ -1,5 +1,5 @@
 Backlog:
-- Better needs for cities
+- More complex and realistic needs for cities (like 1 gun + 100 ammo for crime cities, or concrete and iron stick for building)
 - Cities might change their needs randomly. The growth of
 the output of primary industries depends upon the percentage of cargo
 transported away from them. The more you transport, the faster it grows in
@@ -7,12 +7,6 @@ the long term on average.
 
 - [BlackMarket2] You can sell/buy items/fluids/energy through the Black Market
 - Hauler for fluids?
-
-- [BlackMarket2] Loans can be taken out by a player. Loan interest is paid monthly to the bank,
-at the current interest rate. The initial interest rate is set at the game start
-according to the difficulty settings. The interest rate does not change during the game.
-
-- Be-aware of bankruptcy,  are not nice with people who does not pay.
 
 Property Maintenance
 Why did I build so many signals?
