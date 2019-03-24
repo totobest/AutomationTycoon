@@ -16,6 +16,7 @@
 		"? aai-programmable-vehicles >= 0.5.2",
 		"? aai-vehicles-hauler >= 0.4.1",
 		"? aai-vehicles-miner >= 0.4.1",
+		"? cargo-ships >= 0.0.35",
 		"? BlackMarket2 >= 2.0.0",
 		"? aai-industry >= 0.3.4"
 	]

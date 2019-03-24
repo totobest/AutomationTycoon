@@ -5,12 +5,25 @@ local Force = require('__stdlib__/stdlib/event/force').register_events()
 
 Event.protected_mode = true
 
-local forbidden_entities_on_nauvis = table.array_to_dictionary({
-	"transport-belt",
-	"underground-belt",
-	"splitter",
---	"inserter"
-}, true)
+if settings.global.forbid_building_belts_on_nauvis then
+	local forbidden_entities_on_nauvis = table.array_to_dictionary({
+		"transport-belt",
+		"underground-belt",
+		"splitter",
+		--	"inserter"
+	}, true)
+
+	Event.register({defines.events.on_built_entity, defines.events.on_robot_built_entity}, function (event)
+		-- called at player creation
+		local created_entity = event.created_entity
+		-- LOG("created_entity.type=" .. created_entity.type)
+		if forbidden_entities_on_nauvis[created_entity.type] and not string.find(created_entity.surface.name, "^Factory f") then
+			created_entity.surface.create_entity{name="flying-text", position=created_entity.position, text="Cannot build belts on Nauvis"}
+			created_entity.destroy()
+		end
+	end)
+
+end
 
 Event.register({"on_init", "on_configuration_changed"}, function()
 	LOG("on_init/on_configuration_changed")
@@ -21,7 +34,10 @@ Event.register({"on_init", "on_configuration_changed"}, function()
 		if not recipe.enabled then
 			return
 		end
-		if string.find(recipe.name, "^at-") ~= nil then
+		local f = recipe.name ~= nil and #recipe.name >= 3 and
+			string.sub(recipe.name, 1, 3) == "at-"
+		if f then
+			-- activate default recipe (resource for instance)
 			local ucoin_recipe_name = recipe.name
 			LOG("unlocked ucoin recipe is now available ucoin_recipe_name=" .. ucoin_recipe_name)
 			table.insert(ucoin_recipes, ucoin_recipe_name)
@@ -52,20 +68,9 @@ Event.register({"on_init", "on_configuration_changed"}, function()
 	data.ucoin_recipes = g_ucoin_recipes
 	data.ucoin_recipes_index = g_ucoin_recipes_index
 	LOG("g_ucoin_recipes_index=" .. g_ucoin_recipes_index)
-	LOG(serpent.block(g_ucoin_recipes))
+	LOG("g_ucoin_recipes=" .. serpent.block(g_ucoin_recipes))
 
 end)
-
-Event.register({defines.events.on_built_entity, defines.events.on_robot_built_entity}, function (event)
-	-- called at player creation
-	local created_entity = event.created_entity
-	LOG("created_entity.type=" .. created_entity.type)
-	if forbidden_entities_on_nauvis[created_entity.type] and not string.find(created_entity.surface.name, "^Factory f") then
-		created_entity.surface.create_entity{name="flying-text", position=created_entity.position, text="Cannot build belts on Nauvis"}
-		created_entity.destroy()
-	end
-end)
-
 
 Event.register(defines.events.on_research_finished, function (event)
 	local technology = event.research
@@ -116,9 +121,11 @@ Event.register(defines.events.on_chunk_generated, function (event)
 		area = event.area,
 		name = "at-city"
 	}, function(city)
+		assert(city ~= nil)
 		LOG("position" .. serpent.block(city.position))
-		LOG("get_recipe=" .. city.get_recipe().name)
-		if city.get_recipe().name ~= "at-ucoin-to-ucoin" then
+		local former_recipe = city.get_recipe()
+		if former_recipe ~= nil and former_recipe.name ~= "at-ucoin-to-ucoin" then
+			LOG("recipe already set, skipping. recipe=" .. former_recipe.name)
 			return
 		end
 		local data = global

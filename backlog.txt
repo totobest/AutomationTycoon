@@ -1,5 +1,17 @@
 Backlog:
+
+Ready
+- Settings to re-enable belts on Nauvis
+- Documentation
+
+Waiting
+- Tier 0 Factory Building (with woods only)
+- Better recipes allocation
+- Graphics for cities
 - More complex and realistic needs for cities (like 1 gun + 100 ammo for crime cities, or concrete and iron stick for building)
+
+- Factory buildings are Vehicule Depot directly ?
+
 - Cities might change their needs randomly. The growth of
 the output of primary industries depends upon the percentage of cargo
 transported away from them. The more you transport, the faster it grows in

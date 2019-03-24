@@ -25,8 +25,25 @@ data:extend({
 	}
 })
 
+local UINT16_MAX = 65535
 local function create_ucoin_recipe(item_name, price, enabled)
 	LOG("create_ucoin_recipe item_name=" .. item_name .. " price=" .. price)
+	local results = {}
+	while price > UINT16_MAX do
+		table.insert(results, {
+			type = "item",
+			name = "ucoin",
+			amount = UINT16_MAX
+		})
+		price = price - UINT16_MAX
+	end
+	table.insert(results, {
+		type = "item",
+		name = "ucoin",
+		amount = price % UINT16_MAX
+	})
+
+
 	data:extend({
 		{
 			type = "recipe",
@@ -40,18 +57,20 @@ local function create_ucoin_recipe(item_name, price, enabled)
 			ingredients = {
 				{item_name, 1}
 			},
-			result = "ucoin",
-			result_count = price
+			results = results,
+			main_product = "ucoin"
 		}
 	})
 end
 
 vanilla_resources_prices = {
 --	["water"] = 0,
+	["coal"] = 8,
 	["coal"] = 16,
 	["stone"] = 27,
 	["iron-ore"] = 19,
 	["copper-ore"] = 21,
+	["uranium-ore"] = 71,
 --	["crude-oil"] = 100,
 }
 
@@ -104,7 +123,7 @@ local all_technologies = table.keys(data.raw.technology, true)
 -- LOG(serpent.block(all_technologies))
 
 local function get_unlocking_techonology_from_recipe(recipe_name)
-	LOG("get_unlocking_techonology_from_recipe recipe_name=" .. recipe_name .. " technology_index=" .. technology_index)
+	-- LOG("get_unlocking_techonology_from_recipe recipe_name=" .. recipe_name .. " technology_index=" .. technology_index)
 
 	local saved = recipe_to_technology[recipe_name]
 	if saved ~= nil then
@@ -114,7 +133,7 @@ local function get_unlocking_techonology_from_recipe(recipe_name)
 	-- LOG("#data.raw.technology=" .. #all_technologies)
 	while technology_index <= #all_technologies do
 		local technology = data.raw.technology[all_technologies[technology_index]]
-		LOG("technology.name=" .. technology.name)
+		-- LOG("technology.name=" .. technology.name)
 		local found = nil
 		if technology.effects ~= nil then
 			table.each(technology.effects, function(effect)
@@ -171,7 +190,7 @@ local function get_recipe_cost_for_result(recipe, result_name)
 			#recipe_sub.ingredients * recipe_complexity_cost) / result_count)
 	end)(recipe.normal or recipe.expensive or recipe)
 
-	LOG("get_recipe_cost_for_result recipe.name=" .. recipe.name .. " result_name=" .. result_name .." technology_cost=" .. technology_cost .. " recipe_cost=" .. recipe_cost)
+	-- LOG("get_recipe_cost_for_result recipe.name=" .. recipe.name .. " result_name=" .. result_name .." technology_cost=" .. technology_cost .. " recipe_cost=" .. recipe_cost)
 	return technology_cost + recipe_cost
 end
 
@@ -182,7 +201,7 @@ do
 	local ucoin_recipe_created = {}
 	create_ucoin_recipes_from_item = function (item)
 		assert(item ~= nil)
-		LOG("create_ucoin_recipes_from_item item.name=" .. item.name)
+		-- LOG("create_ucoin_recipes_from_item item.name=" .. item.name)
 
 		if ucoin_recipe_created[item.name] ~= nil then
 			return
